@@ -1,14 +1,16 @@
 <?php
 $host = "localhost";
-$db   = "resume_db";     // your pgAdmin database
-$user = "postgres";      // PostgreSQL username
-$pass = "your_password"; // PostgreSQL password
-$port = "5432";          // default PostgreSQL port
+$port = "5432";
+$db   = "resume_db";
+$user = "postgres";
+$pass = "gwindbms";
 
 try {
-    $pdo = new PDO("pgsql:host=$host;port=$port;dbname=$db", $user, $pass);
-    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    echo "✅ Connected to PostgreSQL!";
+    $dsn = "pgsql:host=$host;port=$port;dbname=$db;";
+    $pdo = new PDO($dsn, $user, $pass, [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]);
+    echo "Connected successfully!";
 } catch (PDOException $e) {
-    echo "❌ Connection failed: " . $e->getMessage();
+    echo "Database connection failed: " . $e->getMessage();
 }
+
+?>
